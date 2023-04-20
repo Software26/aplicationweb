@@ -1,4 +1,4 @@
-from flask import Flask,render_template, request
+from flask import Flask,render_template,request
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -16,11 +16,12 @@ def index():
 def add_contact():
     if request.method == 'POST':
         fullname = request.form['fullname']
-        phone= request.form['phone']
+        phone = request.form['phone']
         email = request.form['email']
-        cur.mysql.connection.cursor()
-        cur.execute()
-        return "recived"
+        print(fullname)
+        print(phone)
+        print(email)
+        return 'Formulary update'
     
 @app.route('/edit')
 def edit():
@@ -28,7 +29,7 @@ def edit():
 
 @app.route("/delete")
 def delete():
-    return delete
+    return "delete"
 
 
 
