@@ -18,7 +18,8 @@ def add_contact():
         fullname = request.form['fullname']
         phone= request.form['phone']
         email = request.form['email']
-        print("Practice de form" + fullname,phone,email)
+        cur.mysql.connection.cursor()
+        cur.execute()
         return "recived"
     
 @app.route('/edit')
