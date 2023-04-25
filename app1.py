@@ -33,12 +33,20 @@ def add_contact():
         return redirect(url_for('index'))
     
 @app.route('/edit')
-def edit():
-    return "edit contact"
+def edit(id):
+    cur = mysql.connection.cursor()
+    cur.exsecute('DELETE FROM contacts WHERE id = %s',(id))
+    mysql.cur.fetchall()
+    print(data')
+    return "recevied"
 
-@app.route("/delete")
-def delete():
-    return "delete"
+@app.route("/delete/<string:id>")
+def delete(id):
+    cur = mysql.connection.cursor()
+    cur.execute('DELETE FROM contacts WHERE id = {0}'.format(id))
+    mysql.connection.commit()
+    flash('Contact Removed Successfull')
+    return id
 
 
 
