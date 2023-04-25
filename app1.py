@@ -37,7 +37,7 @@ def edit(id):
     cur = mysql.connection.cursor()
     cur.exsecute('DELETE FROM contacts WHERE id = %s',(id))
     mysql.cur.fetchall()
-    print(data')
+    print('data')
     return "recevied"
 
 @app.route("/delete/<string:id>")
