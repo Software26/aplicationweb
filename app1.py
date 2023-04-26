@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,url_for,redirect,flash
+from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -35,10 +35,25 @@ def add_contact():
 @app.route('/edit/<id>')
 def get_contact(id):
     cur = mysql.connection.cursor()
-    cur.execute('DELETE FROM contacts WHERE id = %s',(id))
+    cur.execute('SELECT * FROM contacts WHERE id = %s', (id))
     data = cur.fetchall()
-    print(data[0])
     return render_template("edit_contact.html", contact = data[0])
+
+
+@app.route("/update/<id>")
+def update_contact(id):
+    if request.method == 'POST':
+        fullname = request.form['fullname']
+        phone = request.form['phone']
+        email = request.form['email']
+    cur= mysql.connection.cursor()
+    cur.execute("""
+                UPDATE contacts
+                SET fullname = %s,
+                    email = %s,
+                    phone = %s
+                WHERE id = %s                
+                """, (fullname, email, phone, id))
 
 @app.route("/delete/<string:id>")
 def delete_contact(id):
